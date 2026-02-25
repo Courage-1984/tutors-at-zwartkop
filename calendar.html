@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skoolkalender | Tutors@Zwartkop</title>
+  <meta name="description" content="Bly op hoogte van alle skoolgebeurtenisse, vakansies en belangrike datums by Tutors@Zwartkop.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="assets/images/facility/007.webp" fetchpriority="high">
+  <style>
+    .calendar-tip {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .calendar-tip-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .calendar-tip-text h4 { margin-bottom: 0.25rem; font-size: 0.95rem; }
+    .calendar-tip-text p  { margin: 0; font-size: 0.875rem; color: rgba(20,38,67,0.7); }
+  </style>
+  <link rel="preload" as="font" href="assets/fonts/Blogh/Blogh.otf" type="font/otf" crossorigin>
+  <link rel="preload" as="font" href="assets/fonts/Quicksand/Quicksand-VariableFont_wght.ttf" type="font/ttf" crossorigin>
+</head>
+<body>
+
+  <!-- Navigation -->
+    <div id="navbar-placeholder" class="navbar-placeholder"></div>
+  <script src="js/partials.js"></script>
+
+  <main class="page-content">
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="page-hero-bg" style="background-image: url('assets/images/facility/007.webp');"></div>
+      <div class="container page-hero-content">
+        <nav class="breadcrumb">
+          <a href="index.html">Tuis</a>
+          <span>›</span>
+          <span style="color:rgba(255,255,255,0.7);">Skoolkalender</span>
+        </nav>
+        <h1>Skoolkalender</h1>
+        <p class="page-hero-sub">Bly op hoogte van alle skoolgebeurtenisse en vakansies</p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         Calendar Tips Strip
+         ========================================================= -->
+    <section style="background:var(--color-teal); padding:2rem 0;">
+      <div class="container">
+        <div class="grid-3">
+          <div class="calendar-tip">
+            <div class="calendar-tip-icon" style="background:var(--color-navy); color:var(--color-teal);">📅</div>
+            <div class="calendar-tip-text">
+              <h4>Lewendig Opgedateer</h4>
+              <p>Die kalender word outomaties opgedateer wanneer die skool nuwe gebeure byvoeg.</p>
+            </div>
+          </div>
+          <div class="calendar-tip">
+            <div class="calendar-tip-icon" style="background:var(--color-navy); color:var(--color-yellow);">🔔</div>
+            <div class="calendar-tip-text">
+              <h4>Stel Herinneringe In</h4>
+              <p>Klik op 'n gebeurtenis om dit by u eie Google Kalender te voeg.</p>
+            </div>
+          </div>
+          <div class="calendar-tip">
+            <div class="calendar-tip-icon" style="background:var(--color-navy); color:var(--color-green);">📱</div>
+            <div class="calendar-tip-text">
+              <h4>Sien op Enige Toestel</h4>
+              <p>Die kalender werk op rekenaar, tablet en slimfoon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         Google Calendar Embed
+         ========================================================= -->
+    <section class="section bg-off-white">
+      <div class="container">
+
+        <div class="calendar-notice fade-up">
+          <strong>📌 Nota vir die Skool:</strong>
+          Om die Google Kalender hier te vertoon, vervang die kalender-URL in die iframe hieronder 
+          met die insluit-URL van u skool se Google Kalender. 
+          Gaan na Google Kalender → Instellings → Kalender insluit-kode en plak die src-URL hier.
+        </div>
+
+        <div class="calendar-embed-wrapper fade-up">
+          <!--
+            INSTRUKSIES:
+            1. Gaan na calendar.google.com
+            2. Klik op die kalender se drie kolletjies → Instellings en deel
+            3. Rol af na "Integreer kalender"
+            4. Kopieer die "Insluit kode" iframe src URL
+            5. Vervang die src hieronder met u kalender se URL
+
+            EXAMPLE URL FORMAT:
+            https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID@group.calendar.google.com&ctz=Africa%2FJohannesburg
+          -->
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=en.south_africa%23holiday%40group.v.calendar.google.com&ctz=Africa%2FJohannesburg&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=0&bgcolor=%23C6E4E9&color=%23142643"
+            style="border:none;"
+            width="100%"
+            height="700"
+            frameborder="0"
+            scrolling="no"
+            title="Tutors@Zwartkop Skoolkalender"
+          ></iframe>
+        </div>
+
+        <div style="text-align:center; margin-top:1.5rem;">
+          <a
+            href="https://calendar.google.com/calendar"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline"
+          >
+            Oop in Google Kalender →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         Term Dates Info Block
+         ========================================================= -->
+    <section class="section bg-white">
+      <div class="container" style="max-width:800px;">
+        <div class="section-header fade-up">
+          <span class="eyebrow">Algemene Inligting</span>
+          <h2>Vakansies &amp; Sluiting</h2>
+        </div>
+        <div style="display:grid; gap:1rem;">
+          <div style="background:var(--color-light-blue); border-radius:var(--radius-lg); padding:1.5rem; display:flex; gap:1.5rem; align-items:flex-start;" class="fade-up">
+            <div style="font-size:1.75rem;">☀️</div>
+            <div>
+              <h4 style="margin-bottom:0.25rem;">Desember Vakansie</h4>
+              <p style="margin:0; font-size:0.9rem; opacity:0.8;">
+                Die sentrum is gesluit gedurende die Desember vakansie. Nasorg is ook nie beskikbaar nie.
+              </p>
+            </div>
+          </div>
+          <div style="background:var(--color-light-blue); border-radius:var(--radius-lg); padding:1.5rem; display:flex; gap:1.5rem; align-items:flex-start;" class="fade-up">
+            <div style="font-size:1.75rem;">🏖️</div>
+            <div>
+              <h4 style="margin-bottom:0.25rem;">Ander Vakansies</h4>
+              <p style="margin:0; font-size:0.9rem; opacity:0.8;">
+                Nasorg is oop gedurende ander skoolvakansies (April, Junie, September). Kyk die kalender vir spesifieke datums.
+              </p>
+            </div>
+          </div>
+          <div style="background:var(--color-light-blue); border-radius:var(--radius-lg); padding:1.5rem; display:flex; gap:1.5rem; align-items:flex-start;" class="fade-up">
+            <div style="font-size:1.75rem;">📋</div>
+            <div>
+              <h4 style="margin-bottom:0.25rem;">Publieke Vakansiedae</h4>
+              <p style="margin:0; font-size:0.9rem; opacity:0.8;">
+                Die sentrum is gesluit op alle publieke vakansiedae. Raadpleeg die kalender hierbo vir spesifieke datums.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:2rem;" class="fade-up">
+          <p style="font-size:0.9rem; opacity:0.7; margin-bottom:1rem;">
+            Vir meer inligting oor spesifieke datums of om te bevestig, kontak ons gerus.
+          </p>
+          <a href="contact.html" class="btn btn-primary">Kontak Ons</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
