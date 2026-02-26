@@ -3,8 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kontak Ons | Tutors@Zwartkop</title>
-  <meta name="description" content="Kontak Tutors@Zwartkop in Centurion. 250 Summit Ave, Cranbrookvale. Marina: 082 922-1528 | Genevieve: 072 941-9096.">
+  <title>Kontak Ons | Tutors@Zwartkop Centurion</title>
+  <meta name="description" content="Kontak Tutors@Zwartkop in Centurion. 250 Summit Ave, Cranbrookvale (Clubview). Marina Botha: 082 922-1528 | Genevieve Haupt: 072 941-9096 | marinabotha@vodamail.co.za">
+  <meta name="keywords" content="kontak tutors zwartkop, leersentrum centurion kontak, marina botha 082 922 1528, genevieve haupt 072 941 9096, 250 summit ave centurion, clubview leersentrum, afrikaanse skool centurion kontak, tutors zwartkop adres, centurion leersentrum navraag">
+  <meta name="author" content="Tutors@Zwartkop">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tutorsatzwartkop.co.za/contact.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tutorsatzwartkop.co.za/contact.html">
+  <meta property="og:title" content="Kontak Ons | Tutors@Zwartkop Centurion">
+  <meta property="og:description" content="Kontak Tutors@Zwartkop by 250 Summit Ave, Cranbrookvale, Centurion. Marina: 082 922-1528 | Genevieve: 072 941-9096.">
+  <meta property="og:image" content="https://tutorsatzwartkop.co.za/assets/social/og-image.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="af_ZA">
+  <meta property="og:site_name" content="Tutors@Zwartkop">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kontak Ons | Tutors@Zwartkop Centurion">
+  <meta name="twitter:description" content="Kontak Tutors@Zwartkop by 250 Summit Ave, Cranbrookvale, Centurion. Marina: 082 922-1528 | Genevieve: 072 941-9096.">
+  <meta name="twitter:image" content="https://tutorsatzwartkop.co.za/assets/social/twitter-card.webp">
+
+  <!-- Local SEO -->
+  <meta name="geo.region" content="ZA-GP">
+  <meta name="geo.placename" content="Centurion, Gauteng">
+  <meta name="geo.position" content="-25.8584;28.1929">
+  <meta name="ICBM" content="-25.8584, 28.1929">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="preload" as="image" href="assets/images/facility/004.webp" fetchpriority="high">
@@ -130,7 +157,7 @@
           <div class="fade-up">
             <div class="form-card">
               <h3 style="margin-bottom:1.5rem;">Stuur Vir Ons 'n Boodskap</h3>
-              <form id="contact-form" action="#" method="POST" novalidate>
+              <form id="contact-form" action="https://formspree.io/f/mvzbldaw" method="POST">
                 <div class="form-row">
                   <div class="form-group">
                     <label for="name">U Naam *</label>
@@ -186,7 +213,10 @@
                   Stuur Boodskap
                 </button>
                 <p id="form-success" style="display:none; margin-top:1rem; color:var(--color-green); font-weight:700; text-align:center;">
-                  ✓ Dankie! Ons sal u binnekort kontak.
+                  ✓ Dankie! Ons het u boodskap ontvang en sal u binnekort kontak.
+                </p>
+                <p id="form-error" style="display:none; margin-top:1rem; color:#c0392b; font-weight:700; text-align:center;">
+                  ✕ Iets het verkeerd gegaan. Probeer asseblief weer of skakel ons direk.
                 </p>
               </form>
             </div>
@@ -235,14 +265,38 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Simple contact form feedback
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+    var form = document.getElementById('contact-form');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var successMsg = document.getElementById('form-success');
+    var errorMsg = document.getElementById('form-error');
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      document.getElementById('form-success').style.display = 'block';
-      this.reset();
-      setTimeout(() => {
-        document.getElementById('form-success').style.display = 'none';
-      }, 6000);
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Besig om te stuur...';
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response) {
+        if (response.ok) {
+          successMsg.style.display = 'block';
+          form.reset();
+        } else {
+          return response.json().then(function(data) { throw data; });
+        }
+      })
+      .catch(function() {
+        errorMsg.style.display = 'block';
+      })
+      .finally(function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Stuur Boodskap';
+      });
     });
   </script>
 </body>
