@@ -557,6 +557,34 @@ blockquote {
   background-color: var(--color-light-blue);
 }
 
+/* Belangrike Inligting badges */
+.info-badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.info-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  border-left: 4px solid var(--color-teal);
+}
+
+.info-badge-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
 /* =============================================================
    Team / Tutor Cards
    ============================================================= */
@@ -1433,6 +1461,8 @@ blockquote {
   .gallery-preview-grid { grid-template-columns: 1fr 1fr; }
 
   .feature-strip-inner { grid-template-columns: 1fr; }
+
+  .info-badges { grid-template-columns: 1fr; }
 
   .contact-grid { grid-template-columns: 1fr; }
 
