@@ -6,19 +6,19 @@
      • External (Google Maps iframe, Google Calendar) → Network only
    ============================================================= */
 
-const SHELL_CACHE  = 'tz-shell-v3';
+const SHELL_CACHE  = 'tz-shell-v4';
 const IMAGES_CACHE = 'tz-images-v1';
 
 // Assets to pre-cache on install (the "app shell")
+// Extensionless URLs — server rewrites /about to about.html
 const SHELL_ASSETS = [
   '/',
-  '/index.html',
-  '/about.html',
-  '/academics.html',
-  '/admissions.html',
-  '/contact.html',
-  '/calendar.html',
-  '/gallery.html',
+  '/about',
+  '/academics',
+  '/admissions',
+  '/contact',
+  '/calendar',
+  '/gallery',
   '/style.css',
   '/js/main.js',
   '/js/partials.js',
@@ -31,8 +31,9 @@ const SHELL_ASSETS = [
   '/assets/fonts/Blogh/Blogh.otf',
   '/assets/fonts/Quicksand/Quicksand-VariableFont_wght.ttf',
   // Logos used in nav + footer (all pages)
-  '/assets/logos/logo%20+%20name/White.svg',
-  '/assets/logos/logo%20+%20name%20+%20slogan/White.svg',
+  '/assets/logos/new/new_logo.webp',
+  '/assets/logos/new/new_logo2.webp',
+  '/assets/logos/new/logo_new_slogans.webp',
 ];
 
 /* --- Install: pre-cache the app shell --- */

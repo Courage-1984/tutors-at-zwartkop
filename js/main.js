@@ -10,6 +10,7 @@
    DOMContentLoaded fires here, the nav is already in the DOM.
    ============================================================= */
 document.addEventListener('DOMContentLoaded', () => {
+  rewriteLinksForLocalhost();
   initNavigation();
   initScrollAnimations();
   initHeroAnimation();
@@ -19,6 +20,23 @@ document.addEventListener('DOMContentLoaded', () => {
     initGallery();
   }
 });
+
+/* =============================================================
+   Local testing (Live Server): use .html extension so routes work
+   On production (Apache) extensionless URLs are rewritten by .htaccess
+   ============================================================= */
+function rewriteLinksForLocalhost() {
+  const host = window.location.hostname;
+  if (host !== 'localhost' && host !== '127.0.0.1') return;
+
+  document.querySelectorAll('a[href^="/"]').forEach((a) => {
+    const href = a.getAttribute('href');
+    if (!href || href === '/') return;
+    const [path, hash] = href.split('#');
+    if (path === '/' || path.endsWith('.html')) return;
+    a.setAttribute('href', path + '.html' + (hash ? '#' + hash : ''));
+  });
+}
 
 /* =============================================================
    Navigation
@@ -61,11 +79,14 @@ function initNavigation() {
     });
   }
 
-  // Highlight the current page's nav link
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  // Highlight the current page's nav link (extensionless URLs; on localhost may be .html)
+  let pathname = window.location.pathname;
+  if (pathname === '/index.html') pathname = '/';
+  const currentPath = pathname === '/' ? '/' : pathname.replace(/\/$/, '').replace(/\.html$/, '');
   document.querySelectorAll('.nav-menu a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    let href = link.getAttribute('href');
+    let linkPath = (href === '/' || href === '') ? '/' : href.split('#')[0].replace(/\.html$/, '');
+    if (linkPath === currentPath) {
       link.classList.add('active');
     }
   });
@@ -123,8 +144,6 @@ function initScrollAnimations() {
       anchor.hasAttribute('target') ||
       anchor.hasAttribute('download')
     ) return;
-
-    if (!href.endsWith('.html') && href !== '' && href !== '/') return;
 
     e.preventDefault();
     document.startViewTransition(() => {

@@ -69,7 +69,10 @@
    ============================================================= */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
 
 body {
   font-family: var(--font-body);
@@ -80,9 +83,13 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  min-width: 0;
 }
 
 img { max-width: 100%; height: auto; display: block; }
+
+/* Prevent overflow from long unbroken strings (emails, URLs) */
+p, span, a, li { overflow-wrap: break-word; word-wrap: break-word; }
 
 a { color: inherit; text-decoration: none; }
 
@@ -618,8 +625,10 @@ blockquote {
 }
 
 .tutor-photo img {
-  width: 280px;
-  height: 280px;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  aspect-ratio: 1;
   object-fit: contain;
 }
 
@@ -632,13 +641,15 @@ blockquote {
 
 .tutor-grade-tag {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius-pill);
   margin-bottom: 1rem;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 .tutor-info p { font-size: 0.925rem; color: rgba(20, 38, 67, 0.8); }
@@ -1202,8 +1213,9 @@ blockquote {
   border-radius: 50%;
   background-color: var(--color-yellow);
   color: var(--color-navy);
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 1.6rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1388,6 +1400,7 @@ blockquote {
 @media (max-width: 900px) {
   :root { --section-pad: 3.5rem; }
 
+  .nav-container { padding: 0 1.25rem; }
   .nav-toggle { display: flex; }
 
   .nav-menu {
@@ -1442,6 +1455,16 @@ blockquote {
   .gallery-preview-grid .gallery-preview-item:first-child { grid-row: auto; grid-column: auto; }
 
   .hours-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+  .page-hero { padding: 4rem 0 3rem; }
+  .cta-banner { padding: 3rem 1.5rem; }
+
+  /* Quick contact tiles — remove right borders, add bottom borders */
+  .grid-4 > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .grid-4 > div:last-child { border-bottom: none; }
 }
 
 /* =============================================================
@@ -1451,33 +1474,95 @@ blockquote {
   :root { --section-pad: 2.5rem; }
 
   .container { padding: 0 1.25rem; }
+  .nav-container { padding: 0 1rem; }
 
   .grid-2, .grid-3, .grid-4,
   .tutor-grid, .quotes-grid,
   .steps-grid, .curriculum-grid,
   .footer-grid { grid-template-columns: 1fr; }
 
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-preview-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .gallery-preview-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .gallery-preview-grid .gallery-preview-item:first-child {
+    grid-row: auto;
+    grid-column: auto;
+  }
 
   .feature-strip-inner { grid-template-columns: 1fr; }
 
-  .info-badges { grid-template-columns: 1fr; }
+  .info-badges { grid-template-columns: 1fr; gap: 0.75rem; }
 
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
 
   .hero-content { padding: 2rem 1.25rem; }
+  .hero-slogan { font-size: 1.1rem !important; }
+  .hero-sub-slogan { font-size: 0.75rem !important; }
+  .hero-content .fade-up img { max-height: 100px !important; }
+  .page-hero { padding: 3rem 0 2.5rem; }
 
   .form-row { grid-template-columns: 1fr; }
+  .form-card { padding: 1.5rem; }
 
-  .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.75rem;
+  }
+  .footer-brand img { max-height: 90px; }
+  .footer-grid { gap: 2rem; }
 
-  .btn-group { flex-direction: column; align-items: flex-start; }
+  .btn-group {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .btn-group .btn { width: 100%; justify-content: center; }
 
-  .lightbox-prev { left: 0.5rem; }
-  .lightbox-next { right: 0.5rem; }
+  .lightbox { padding: 1rem; }
+  .lightbox-prev { left: 0.5rem; width: 40px; height: 40px; }
+  .lightbox-next { right: 0.5rem; width: 40px; height: 40px; }
 
-  .calendar-embed-wrapper iframe { height: 500px; }
+  .calendar-embed-wrapper iframe { height: 450px; min-height: 350px; }
+
+  .cta-banner { padding: 2.5rem 1rem; }
+  .cta-banner h2 { font-size: 1.5rem; }
+  .cta-banner p { font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+  /* Calendar tips stack on mobile */
+  .calendar-tip { flex-direction: column; text-align: center; }
+
+  /* About page stats boxes stack on mobile */
+  .mission-stats { grid-template-columns: 1fr !important; }
+}
+
+/* =============================================================
+   Responsive — Extra small (max 400px)
+   ============================================================= */
+@media (max-width: 400px) {
+  .container { padding: 0 1rem; }
+  .nav-container { padding: 0 0.75rem; }
+
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-filters { flex-direction: column; }
+  .filter-btn { width: 100%; }
+
+  .tutor-grade-tag { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+
+  .hero h1 { font-size: 1.75rem; }
+  .hero-subtitle, .page-hero-sub { font-size: 0.95rem; }
+
+  .section-header h2 { font-size: 1.5rem; }
+  .section-header p { font-size: 0.95rem; }
+
+  .map-embed { height: 280px; }
+  .calendar-embed-wrapper iframe { height: 400px; }
+
+  .term-info-block { flex-direction: column !important; }
 }
 
 /* =============================================================
